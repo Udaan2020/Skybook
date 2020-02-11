@@ -1,0 +1,19 @@
+.skybook-form
+{
+    margin-top: 10%;
+    margin-left: 25%;
+    margin-bottom: 5%;
+    padding: 5%;
+    border-radius: 1%;
+    background-image: url("create-flight.jpg");
+    background-size: cover;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: white;
+    width: 50%;
+}
+
+.skybook-form button
+{
+    margin: 2%;
+}
+
