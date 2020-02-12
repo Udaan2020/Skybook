@@ -1,0 +1,29 @@
+# Created at 2020-01-27T09:37:28.453
+TestSet has not finished before stream error has appeared >> initializing exit by non-null configuration: null
+java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:397)
+	at org.apache.maven.surefire.booter.MasterProcessCommand.decode(MasterProcessCommand.java:115)
+	at org.apache.maven.surefire.booter.CommandReader$CommandRunnable.run(CommandReader.java:391)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+
+# Created at 2020-01-27T09:37:28.732
+Unexpected IOException with stream: 2020-01-27 09:37:28.730  INFO 92840 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+
+
+# Created at 2020-01-27T09:37:29.175
+Unexpected IOException with stream: 2020-01-27 09:37:29.174  INFO 92840 --- [           main] c.c.u.skybook.SkybookApplicationTests    : Started SkybookApplicationTests in 37.055 seconds (JVM running for 38.255)
+
+
+# Created at 2020-01-27T09:37:29.208
+Unexpected IOException: 5,1,com.capgemini.uraan.skybook.SkybookApplicationTests,contextLoads,null,null,null
+
+
+# Created at 2020-01-27T09:37:29.394
+Unexpected IOException: 6,1,com.capgemini.uraan.skybook.SkybookApplicationTests,contextLoads,null,null,null
+
+
+# Created at 2020-01-27T09:37:29.398
+Unexpected IOException: 2,1,org.apache.maven.surefire.junitplatform.JUnitPlatformProvider,com.capgemini.uraan.skybook.SkybookApplicationTests,null,null,null
+
+
