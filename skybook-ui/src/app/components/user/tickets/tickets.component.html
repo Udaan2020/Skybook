@@ -1,0 +1,47 @@
+<br>
+<br>
+<button (click)="downloadTicket()" style="float: right;margin-right: 20%; margin-bottom: 2%;border-radius: 50%;" class="btn btn-lg btn-success"><i class="fas fa-arrow-down"></i></button>
+<div class="container-fluid ticket" id="ticket">
+    <img  [src]="'assets/images/skybook.png'" height="100px" width="100px"> 
+    <qrcode  style="float:right" [qrdata]="pnr" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+            <h1 style="color:rebeccapurple; text-align: center;">E-Ticket <b>(PNR : {{pnr}})</b></h1>
+            <hr>
+            <b><h3 style="color: chocolate;">{{flt.flight.sourceAirport.airportId}}({{flt.flight.sourceAirport.airportName}})</h3><br><h5> to </h5><h3 style="color:goldenrod">{{flt.flight.destinationAirport.airportId}}({{flt.flight.destinationAirport.airportName}})</h3></b>
+            <hr>       
+            <p>Departure : {{flt.departureDate}} <b>({{flt.departureTime}})</b></p> 
+                    <p>Arrival : {{flt.arrivalDate}}<b>({{flt.arrivalTime}})</b></p>
+                   <p>Operated By : {{flt.flight.airlines.airlineName}}
+                  <img [src]="'assets/images/'+flt.flight.airlines.airlineName+'.png'" height="50px" width="50px"> </p>
+                   <p>Model : {{flt.flight.model}}</p>
+                   <p>Total Amount : <i class="fas fa-rupee-sign"></i> {{fare}}</p>
+                   <hr>
+                   <h2>Passenger Details</h2>
+                   <div class="row">
+                   <div class="col-sm-6 col-md-6 col-lg-6" *ngFor="let p of passengers; let i = index;">
+                       <h5 style="color:rebeccapurple">Passenger {{i+1}} </h5>
+                    <p style="color: grey;">Name : {{p.name}}</p>
+                    <p style="color: grey;">email : {{p.email}}</p>
+                    <p style="color: grey;"> aadhar : {{p.aadhar}}</p>
+                       </div>
+                       </div>
+                   <hr>
+                   <h2> Baggage Policy</h2>
+                    <p>Check In Baggage : <b>{{flt.flight.checkInLuggage}}Kgs per person</b></p>
+                   <p>Cabin Baggage : <b>{{flt.flight.cabinLuggage}}Kgs per person</b></p>
+                   <hr>
+                   <h2>Cancellation Policy</h2>
+                   <p><b>3 days before departure</b>:INR 3000 or Airfare charges plus Fare difference will be charged (Whichever is lower).</p>
+                   <p><b>4 or more days before departure</b>:Upto INR 2500 or Airfare charges plus Fare difference will be charged (Whichever is lower).</p>
+                   <hr>
+                   <img style="border-radius: 5px;" [src]="images" height="400px" width="650px">
+                   <hr>
+                   <h6>Terms and Condition*</h6>
+                   <ul style="color:grey">
+                       <li>This ticket is only valid with a government issued id proof like(passport,PAN,voter, AADHAR etc).</li>
+                       <li>Skybook is not responsible for any cancellation of flight by operationg airlines</li>
+                       <li>For more details visit www.skybook.com</li>
+
+                   </ul>
+                   <hr>
+                   <h6 style="color: grey; text-align: center;">Thanks for visiting www.skybook.com</h6>
+</div>

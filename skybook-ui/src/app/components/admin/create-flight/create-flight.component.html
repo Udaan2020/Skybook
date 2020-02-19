@@ -1,0 +1,105 @@
+<ngx-loading [show]="showLoadingIndicator" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+    <form  class="container skybook-form" ngNativeValidate (ngSubmit)="onSubmit()" #addflightform ="ngForm" id="add-flight-form">
+      <div>
+        <h2 style="text-align: center;">{{formHeading}}</h2>
+        <h6 style="text-align: center;">Field marked * are required </h6>
+      </div>
+
+      <div class="form-group">
+        <label>Flight No*</label>
+        <input type="text" class="form-control" id="flightNo" [disabled]='isDisabled()' [(ngModel)] = "flight.flightNo" #flightNo = "ngModel"
+        pattern="^[a-zA-Z][a-zA-Z0-9]*$" [ngModelOptions] = "{standalone : true}"  required >
+        <div  style="color:red" *ngIf="flightNo.errors?.required && flightNo.touched" class="alert alert-danger">Flight Id is required</div>
+        <div  style="color:red" *ngIf="flightNo.errors?.pattern && flightNo.touched" class="alert alert-danger">Flight Id should be alphanumeric starting with a letter</div>
+      </div>
+
+      <div class="form-group">
+        <label>Economic Seat Count*</label>
+        <input type="number" class="form-control" id="economySeat" [(ngModel)]="flight.economySeat" #economySeat = "ngModel"
+        [ngModelOptions] = "{standalone : true}"  pattern="^0*([0-9]|[1-8][0-9]|9[0-9]|[1-4][0-9]{2}|500)$" required max="500" min="0">
+        <div  style="color:red" *ngIf="economySeat.errors?.required && economySeat.touched" class="alert alert-danger">Economy Seat Allocation is required</div>
+        <div  style="color:red" *ngIf="economySeat.errors?.pattern && economySeat.touched" class="alert alert-danger">Economy Seat should be in range 0 to 500</div>
+      </div>
+
+      <div class="form-group">
+        <label>Business Seat Count*</label>
+        <input type="number" class="form-control" id="businessSeat" #businessSeat = "ngModel"
+        [(ngModel)] ="flight.businessSeat" required
+        [ngModelOptions] = "{standalone : true}" pattern="^0*([0-9]|[1-8][0-9]|9[0-9]|[1-4][0-9]{2}|500)$" max="500" min="0">
+        <div  style="color:red" *ngIf="businessSeat.errors?.required && businessSeat.touched" class="alert alert-danger">Business Seat Allocation is required</div>
+        <div  style="color:red" *ngIf="businessSeat.errors?.pattern && businessSeat.touched" class="alert alert-danger">Business Seat should be in range 0 to 500</div>
+      </div>
+      <div class="form-group">
+        <label>Check in Luggage Allowance*</label>
+        <input type="number" class="form-control" id="checkInLuggage" 
+        [(ngModel)] = 'flight.checkInLuggage' #checkInLuggage = "ngModel"
+        [ngModelOptions] = "{standalone : true}"  pattern="^0*([0-9]|[1-8][0-9]|9[0-9]|100)$"
+         required max="100" min="0">
+         <div  style="color:red" *ngIf="checkInLuggage.errors?.required && checkInLuggage.touched" class="alert alert-danger">Check In Luggage Allocation is required</div>
+         <div  style="color:red" *ngIf="checkInLuggage.errors?.pattern && checkInLuggage.touched" class="alert alert-danger">Chechk in Luggage should be in range 0 to 100</div>
+      </div>
+      <div class="form-group">
+        <label>Cabin Luggage Allowance*</label>
+        <input type="number" class="form-control" id="cabinLuggage" pattern="^0*([0-9]|[1-8][0-9]|9[0-9]|100)$"
+        #cabLug = "ngModel"
+        [(ngModel)]="flight.cabinLuggage" [ngModelOptions] = "{standalone : true}" 
+         required max="500" min="0">
+         <div  style="color:red" *ngIf="cabLug.errors?.required && cabLug.touched" class="alert alert-danger">Cabbin Luggage Allocation is required</div>
+         <div  style="color:red" *ngIf="cabLug.errors?.pattern && cabLug.touched" class="alert alert-danger">Cabbin Luggage should be in range 0 to 100</div>
+      </div>
+
+      <div class="form-group">
+        <label>Aeroplane Model*</label>
+        <mat-select class="form-control" id="model" [(ngModel)] = "flight.model" #model="ngModel"
+        [ngModelOptions] = "{standalone : true}"  required>
+          <mat-option value="">Please select a model</mat-option>
+          <mat-option *ngFor="let m of models"
+                  [value]="m">
+                  {{m}}
+          </mat-option>
+        </mat-select>
+        <div  style="color:red" *ngIf="model.errors?.required && model.touched" class="alert alert-danger">FLight Model is required</div>
+      </div>
+
+      <div class="form-group">
+        <label>Departure Airport*</label>
+        <mat-select class="form-control" id="sourceAirport" [(ngModel)] = 'flight.sourceAirport' #src="ngModel"
+        [ngModelOptions] = "{standalone : true}" required>
+          <mat-option value="">Please select an Airport</mat-option>
+          <mat-option *ngFor="let airport of airports"
+                  [value]="airport.airportId">
+                  {{airport.airportName}}<b>({{airport.airportId}})</b>
+          </mat-option>
+        </mat-select>
+        <div  style="color:red" *ngIf="src.errors?.required && src.touched" class="alert alert-danger">Departure Airport is required</div>
+      </div>
+
+      <div class="form-group">
+        <label>Arrival Airport*</label>
+        <mat-select class="form-control" id="destinationAirport" [(ngModel)] = 'flight.destinationAirport' #dst="ngModel"
+        [ngModelOptions] = "{standalone : true}" required>
+          <mat-option value="">Please select an Airport</mat-option>
+          <mat-option *ngFor="let dairport of airports"
+                  [value]="dairport.airportId">
+                  {{dairport.airportName}}<b>({{dairport.airportId}})</b>
+          </mat-option>
+        </mat-select>
+        <div  style="color:red" *ngIf="dst.errors?.required && dst.touched" class="alert alert-danger">Arrival Airport is required</div>
+      </div>
+
+
+      <div class="form-group">
+        <label>Airline Operator*</label>
+        <mat-select class="form-control" id="airoperator" [(ngModel)]="flight.airOperator" #airop ="ngModel"
+        [ngModelOptions] = "{standalone : true}" required>
+          <mat-option value="">Please select an Airline</mat-option>
+          <mat-option *ngFor="let airline of airlines"
+                  [value]="airline.airlineId" >
+                  {{airline.airlineName}}<b>({{airline.airlineId}})</b>
+          </mat-option>
+        </mat-select>
+        <div  style="color:red" *ngIf="airop.errors?.required && airop.touched" class="alert alert-danger">Airline Operator is required</div>
+      </div>
+      <button type="submit" [disabled]="addflightform.invalid" class="btn btn-primary">{{submitText}}</button>
+      <button  (click) = "goBack()" class="btn btn-danger">Cancel</button>
+    </form>

@@ -1,0 +1,40 @@
+<div class="container skybook-table" >
+
+
+  
+    <table datatable id="flight-table" class="table  table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">PNR</th>
+        <th scope="col">Flight ID</th>
+        <th scope="col">Transaction ID</th>
+        <th scope="col">Fare</th>
+        <th scope="col">Actions</th>
+
+        
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let bk of bookings">
+        <th scope="row"> 
+          {{bk.flightPnr}}
+        </th>
+        <td>
+          {{bk.flightId}}
+        </td>
+        <td>
+           {{bk.transactionId}}
+        </td>
+        <td>
+            <i class="fas fa-rupee-sign"></i>{{bk.fare}}
+        </td>
+        <td>
+            <button (click)="cancel(bk.flightPnr)" class="btn btn-lg btn-danger"><i class="fas fa-trash-alt"></i> Cancel</button>
+            <button  (click)="viewBooking(bk.flightId,bk.flightPnr,bk.fare)" class="btn btn-lg btn-success"><i class="fas fa-eye"></i> View</button >
+        </td>
+        
+      </tr>
+    </tbody>
+    </table>
+    
+  </div>

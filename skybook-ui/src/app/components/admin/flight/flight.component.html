@@ -1,0 +1,81 @@
+<div class="container skybook-search">
+  <div class="row">
+  <div class="col-sm-5 col-lg-5 col-md-5">
+  <label>Source</label>
+  <mat-select   col-sm class="form-control form-control-lg" [(ngModel)]='src'>
+   
+          <mat-option *ngFor="let airport of airports"
+                  [value]="airport.airportId">
+                  {{airport.airportName}}<b>({{airport.airportId}})</b>
+          </mat-option>
+  </mat-select>
+  </div>
+  <div class="col-sm-5 col-lg-5 col-md-5">
+    <label>Destination</label>
+    <mat-select  col-sm class="form-control form-control-lg" [(ngModel)]='dest'>
+          <mat-option *ngFor="let airport of airports"
+                  [value]="airport.airportId">
+                  {{airport.airportName}}<b>({{airport.airportId}})</b>
+          </mat-option>
+    </mat-select>
+    </div>
+    <div class="col-sm-2 col-lg-2 col-md-2">
+      <button style="margin-top: 5%;" type="button" class="btn btn-lg btn-warning" (click) = "searchFlight()">
+        <i class="fas fa-search"></i>Search</button>
+    </div>
+    </div>
+</div>
+<button style="background-color:rebeccapurple;width:250px;margin-left: 5%;" (click)='addFlight()' class='btn add-flight btn-lg btn-info'>
+  <i class="fas fa-plus"></i><i class="fas fa-plane"></i> Add Flight</button>
+  <button style="background-color:rebeccapurple;width:250px; margin-left: 5%;" (click)='scheduleFlight()' class='btn add-flight btn-lg btn-info'>
+    <i class="fas fa-clock"></i><i class="fas fa-plane"></i> Schedule Flight</button>
+  
+<div class="container skybook-table" >
+
+
+  
+    <table datatable id="flight-table" class="table  table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Flight Operator</th>
+        <th scope="col">Flight No.</th>
+        <th scope="col">Flight Model</th>
+        <th scope="col">Departure</th>
+        <th scope="col"> Arrival</th>
+        <th scope="col"> Actions</th>
+
+        
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let flight of flights">
+        <th scope="row"> 
+          {{flight.airlines.airlineName}}
+        </th>
+        <td>
+          {{flight.flightNo}}
+        </td>
+        <td>
+          <i class="fas fa-plane"></i> {{flight.model}}
+        </td>
+        <td>
+          <h3>
+            <i class="fas fa-map-marker-alt"></i><b style="color: chocolate;">{{flight.sourceAirport.airportId}}</b></h3><br>
+          {{flight.sourceAirport.airportName}}
+        </td>
+        <td>
+          <h3>
+            <i class="fas fa-map-marker-alt"></i>
+            <b style="color: darkgoldenrod;">{{flight.destinationAirport.airportId}}</b></h3><br>
+          {{flight.destinationAirport.airportName}}
+        </td>
+        <td>
+              <button type="button" class="btn btn-success" (click) = "editFlight(flight.flightNo)"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger" (click) = "delete(flight.flightNo)"><i class="fas fa-trash-alt"></i></button>
+        </td>
+        
+      </tr>
+    </tbody>
+    </table>
+    
+  </div>

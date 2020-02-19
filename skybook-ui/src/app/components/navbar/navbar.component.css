@@ -1,0 +1,21 @@
+.bg-purple
+{
+    background-image: linear-gradient(to right top, #5b129b, #7e32a7, #9c50b5, #b86ec3, #d28dd2);
+    color:white;
+}
+
+.navbar a
+{
+    color : white;
+}
+
+.navbar a :hover
+{
+    color : orange;
+}
+
+.navbar .navbar-nav  button .nb
+{
+    float: right;
+    color: orange;
+}
